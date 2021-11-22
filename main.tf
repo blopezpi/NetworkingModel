@@ -8,7 +8,7 @@ module "resource_groups" {
   rg_name = var.resource_group_name
   location = var.location
 
-module "vnets" {
+module "vnetses" {
     source = "./modules/vnet"
     rg_name = var.resource_group_name
     vnet_name = var.virtual_network_name
