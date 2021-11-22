@@ -14,7 +14,7 @@ module "vnets" {
     count = length(var.address_space)
     depends_on = [module.resource_groups]
     source = "./modules/vnet"
-    rg_name = module.resource_groups.name
+    rg_name = module.resource_groups.azurerm_resource_group.rg.name
     vnet_name = var.vnet_name
     location = var.location
     address_space = var.address_space[count.index]
