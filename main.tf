@@ -9,7 +9,6 @@ module "resource_groups" {
   location = var.location
 }
 
-
 module "vnets" {
     count = length(var.address_space)
     source = "./modules/vnet"
