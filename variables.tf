@@ -1,4 +1,4 @@
-variable "resource_group_name" {
+variable "rg_name" {
 default = "rg_tkt_project"
 }
 variable "location" {
