@@ -6,9 +6,9 @@ default = "westeurope"
 }
 
 variable "address_space" {
-  type          = list
+  type          = list(string)
   description   = "The address space that is used by the network."
-  default       = ["172.21.0.0/16", "172.22.0.0/16", "172.23.0.0/16"]
+  default       = "172.21.0.0/16", "172.22.0.0/16", "172.23.0.0/16"
 }
 
 variable "vnet_name" {
