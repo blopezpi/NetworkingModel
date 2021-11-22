@@ -11,5 +11,5 @@ variable "address_space" {
   default       = ["172.21.0.0/16", "172.22.0.0/16", "172.23.0.0/16"]
 }
 variable "vnet_name" {
-default = ""
+default = "vnet-"
 }
