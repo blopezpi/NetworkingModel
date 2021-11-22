@@ -16,7 +16,4 @@ module "vnets" {
     vnet_name = var.virtual_network_name
     location = var.location
     address_space = var.address_space[count.index]
-
-
-
-
+}
