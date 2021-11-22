@@ -1,8 +1,6 @@
-resource "azurerm_virtual_network" "vnet" {
-  name                = var.vnet_name
+resource "azurerm_resource_group" "rg" {
+  name                = var.rg_name
   location            = var.location
-  rg_name             = var.rg_name
-  address_space       = var.address_space
 #  tags                = local.tags
 
 #   dns_servers = coalesce(
