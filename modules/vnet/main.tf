@@ -1,5 +1,3 @@
-
-
 resource "azurerm_virtual_network" "vnet" {
   name                = var.vnet.name
   location            = var.location
@@ -7,6 +5,7 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = var.vnet.address_space
 
   }
+
 #  tags                = local.tags
 
 #   dns_servers = coalesce(
