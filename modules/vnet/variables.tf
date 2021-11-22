@@ -1,4 +1,4 @@
-variable "vnet" {
+variable "vnet_name" {
   default = ""
 }
 
