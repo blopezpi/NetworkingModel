@@ -22,9 +22,10 @@ module "vnets" {
 module "peerings" {
     count = 2
     depends_on = [module.vnets]
-    source = "./modules/vnet/peerings"
+    source = "./modules/peerings"
     rg_name = module.resource_groups.rg-name
-    vnet_name = "${var.vnet_name}${count.index}"
+    vnet_name_hub = "${var.vnet_name}0"
+    vnet_name_spoke = "${var.vnet_name}${count.index + 1}"
     location = var.location
-    address_space = var.address_space[count.index]
+#    address_space = var.address_space[count.index]
 }
