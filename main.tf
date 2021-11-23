@@ -18,3 +18,13 @@ module "vnets" {
     location = var.location
     address_space = var.address_space[count.index]
 }
+
+module "peerings" {
+    count = 2
+    depends_on = [module.vnets]
+    source = "./modules/vnet/peerings"
+    rg_name = module.resource_groups.rg-name
+    vnet_name = "${var.vnet_name}${count.index}"
+    location = var.location
+    address_space = var.address_space[count.index]
+}
