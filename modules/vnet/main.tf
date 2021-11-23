@@ -6,18 +6,16 @@ resource "azurerm_virtual_network" "vnet" {
 
   }
 
-#  tags                = local.tags
-
-#   dns_servers = coalesce(
-#     try(lookup(var.settings.vnet, "dns_servers", null)),
-#     try(local.dns_servers_process, null)
-#   )
-
-#   dynamic "ddos_protection_plan" {
-#     for_each = var.ddos_id != "" ? [1] : []
-
-#     content {
-#       id     = var.ddos_id
-#       enable = true
-#     }
-#   }
+ 
+  
+  resource "azurerm_subnet" "subnets" {
+  depends_on = [
+    azurerm_virtual_network.vnet
+  ]
+  count                 = 2
+  name                  = "subnet${count.index + 1}-${var.vnet_name}"
+  resource_group_name   = var.rg_name
+  virtual_network_name  = azurerm_virtual_network.vnet.name
+  #address_prefixes      = var.address_space
+  address_prefixes      =  [cidrsubnet("${azurerm_virtual_network.vnet.address_space[0]}",8,(count.index + 1))]
+  }
