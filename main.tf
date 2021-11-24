@@ -29,3 +29,11 @@ module "peerings" {
     location = var.location
 #    address_space = var.address_space[count.index]
 }
+
+module "subnetshub" {
+    depends_on = [module.vnets]
+    source = "./modules/subnetshub"
+    rg_name = module.resource_groups.rg-name
+    vnet_name_hub = "${var.vnet_name}0"
+
+}
