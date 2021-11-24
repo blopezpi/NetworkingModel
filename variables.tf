@@ -13,3 +13,26 @@ variable "address_space" {
 variable "vnet_name" {
 default = "vnet"
 }
+
+variable "fwpip_name" {
+default = "tkt-azfw-pip01"
+}
+
+variable "fw_name" {
+default = "tkt-azfw-01"
+}
+
+variable "appgw_pip_name" {
+    default = "tkt-appgw-pip-01"
+}
+variable "appgw_name" {
+default = "tkt-appgw-01"
+}
+variable "appgw_subnet_name" {
+default = "ApplicationGatewaySubnet"
+}
+
+variable "vnet_name_hub" {
+default = "vnet0"
+}
+
