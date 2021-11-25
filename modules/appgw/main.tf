@@ -16,14 +16,14 @@ locals {
 }
 
 resource "azurerm_public_ip" "appgw_pip" {
-  name                = "${var.appgw_name}-pip01" #tkt-appgw-pip01
+  name                = "${var.prefix}-${var.appgw_name}-pip01" #tkt-appgw-pip01
   location            = var.location
   resource_group_name = var.rg_name
   allocation_method   = "Dynamic"
 }
 
 resource "azurerm_application_gateway" "network" {
-  name                = var.appgw_name
+  name                = "${var.prefix}${var.appgw_name}"
   location            = var.location
   resource_group_name = var.rg_name
 

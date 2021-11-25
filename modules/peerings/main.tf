@@ -3,7 +3,6 @@ data "azurerm_virtual_network" "vnet_hub" {
 name                = var.vnet_name_hub
 resource_group_name = var.rg_name
 }
-
 data "azurerm_virtual_network" "vnet_spoke" {
 name                = var.vnet_name_spoke
 resource_group_name = var.rg_name

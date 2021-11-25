@@ -16,4 +16,3 @@ variable "appservplan" {
 variable "prefix" {
   default= ""
 }
-

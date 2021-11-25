@@ -9,3 +9,6 @@ variable "rg_name" {
 variable "vnet_name_hub" {
   default = ""
 }
+variable "prefix" {
+  default= ""
+}

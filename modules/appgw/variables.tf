@@ -28,4 +28,8 @@ variable "appgw_subnet_name" {
 variable "vnet_name_hub" {
   default = ""
 }
+variable "prefix" {
+  default= ""
+}
+
 

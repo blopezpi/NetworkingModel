@@ -1,5 +1,5 @@
 resource "azurerm_app_service_plan" "appservplan" {
-  name                = "appserviceplantkt"
+  name                = "${var.prefix}-${var.appservplan}"
   location            = var.location
   resource_group_name = var.rg_name
 
@@ -10,7 +10,7 @@ resource "azurerm_app_service_plan" "appservplan" {
 }
 
 resource "azurerm_app_service" "appserv" {
-  name                = "tkt-app-service"
+  name                = "${var.prefix}-${var.appserv}"
   location            = var.location
   resource_group_name = var.rg_name
   app_service_plan_id = azurerm_app_service_plan.appservplan.id

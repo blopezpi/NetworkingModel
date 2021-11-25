@@ -17,3 +17,7 @@ variable "fw_name" {
 variable "subnetfw_id" {
   default= ""
 }
+
+variable "prefix" {
+  default= ""
+}

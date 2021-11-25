@@ -5,7 +5,8 @@ provider "azurerm" {
     }
 module "resource_groups" {
   source = "./modules/rg"
-  rg_name = var.rg_name
+  prefix = var.prefix
+  rg_name = "${var.prefix}-${var.rg_name}"
   location = var.location
 }
 
@@ -41,6 +42,7 @@ module "subnetshub" {
 module "azfirewall" {
     depends_on = [module.vnets]
     source = "./modules/fw"
+    prefix = var.prefix
     rg_name = module.resource_groups.rg-name
     location = var.location
     subnetfw_id = module.subnetshub.subnetfw-id
@@ -60,6 +62,7 @@ module "appgw" {
     appgw_name = var.appgw_name
     appgw_subnet_name = var.appgw_subnet_name
     vnet_name_hub = var.vnet_name_hub
+    prefix = var.prefix
     #vnet_name_hub = module.vnets.vnet-name
     #subnet_id = module.subnetshub.subnet-id
 #    address_space = var.address_space[count.index]
@@ -70,6 +73,7 @@ module "tm" {
     source = "./modules/tm"
     rg_name = module.resource_groups.rg-name
     tm_dns_name = var.tm_dns_name
+    prefix = var.prefix
     #vnet_name_hub = "${var.vnet_name}0"
 
 }
@@ -79,7 +83,20 @@ module "appserv" {
     source = "./modules/appserv"
     rg_name = module.resource_groups.rg-name
     location = var.location
+    appserv = var.appserv
+    appservplan = var.appservplan
+    prefix = var.prefix
    # tm_dns_name = var.tm_dns_name
+    #vnet_name_hub = "${var.vnet_name}0"
+
+}
+
+module "db" {
+    depends_on = [module.vnets]
+    source = "./modules/db"
+    rg_name = module.resource_groups.rg-name
+    prefix = var.prefix
+    location = var.location
     #vnet_name_hub = "${var.vnet_name}0"
 
 }

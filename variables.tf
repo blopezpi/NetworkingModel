@@ -1,5 +1,5 @@
 variable "rg_name" {
-default = "rg_tkt_project"
+default = "rg_project"
 }
 variable "location" {
 default = "westeurope"
@@ -15,18 +15,18 @@ default = "vnet"
 }
 
 variable "fwpip_name" {
-default = "tkt-azfw-pip01"
+default = "azfw-pip01"
 }
 
 variable "fw_name" {
-default = "tkt-azfw-01"
+default = "azfw-01"
 }
 
 variable "appgw_pip_name" {
-    default = "tkt-appgw-pip-01"
+    default = "appgw-pip-01"
 }
 variable "appgw_name" {
-default = "tkt-appgw-01"
+default = "appgw-01"
 }
 variable "appgw_subnet_name" {
 default = "ApplicationGatewaySubnet"
@@ -37,5 +37,18 @@ default = "vnet0"
 }
 
 variable "tm_dns_name" {
-  default= "tktapp"
+  default= "app"
 }
+
+variable "prefix" {
+  default= "rrl"
+}
+
+variable "appserv" {
+default = "appserv"
+}
+
+variable "appservplan" {
+  default= "apppservplan"
+}
+

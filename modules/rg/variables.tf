@@ -14,3 +14,6 @@ variable "address_space" {
 variable "vnet_name" {
     default =   ""
 }
+variable "prefix" {
+  default= ""
+}

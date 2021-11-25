@@ -19,3 +19,6 @@ variable "vnet_name_hub" {
 variable "vnet_name_spoke" {
   default = ""
 }
+variable "prefix" {
+  default= ""
+}

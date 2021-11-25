@@ -9,7 +9,9 @@ variable "address_space" {
 variable "location" {
   default= ""
 }
-
 variable "rg_name" {
+  default= ""
+}
+variable "prefix" {
   default= ""
 }
