@@ -4,11 +4,11 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_dns_zone" "example-public" {
-  name                = "${var.prefix}.cloud"
+  name                = "techypi.es"
   resource_group_name = azurerm_resource_group.example.name
 }
 
-resource "azurerm_private_dns_zone" "example-private" {
-  name                = "mydomain.com"
-  resource_group_name = azurerm_resource_group.example.name
-}
+# resource "azurerm_private_dns_zone" "example-private" {
+#   name                = "mydomain.com"
+#   resource_group_name = azurerm_resource_group.example.name
+# }
