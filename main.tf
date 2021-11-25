@@ -64,3 +64,22 @@ module "appgw" {
     #subnet_id = module.subnetshub.subnet-id
 #    address_space = var.address_space[count.index]
 }
+
+module "tm" {
+    depends_on = [module.vnets]
+    source = "./modules/tm"
+    rg_name = module.resource_groups.rg-name
+    tm_dns_name = var.tm_dns_name
+    #vnet_name_hub = "${var.vnet_name}0"
+
+}
+
+module "appserv" {
+    depends_on = [module.vnets]
+    source = "./modules/appserv"
+    rg_name = module.resource_groups.rg-name
+    location = var.location
+   # tm_dns_name = var.tm_dns_name
+    #vnet_name_hub = "${var.vnet_name}0"
+
+}

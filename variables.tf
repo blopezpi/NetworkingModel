@@ -36,3 +36,6 @@ variable "vnet_name_hub" {
 default = "vnet0"
 }
 
+variable "tm_dns_name" {
+  default= "tktapp"
+}

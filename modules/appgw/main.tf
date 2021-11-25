@@ -6,13 +6,13 @@ virtual_network_name = var.vnet_name_hub
 }
 
 locals {
-  backend_address_pool_name      = "${data.azurerm_subnet.appgw_subnet.name}-beap"
-  frontend_port_name             = "${data.azurerm_subnet.appgw_subnet.name}-feport"
-  frontend_ip_configuration_name = "${data.azurerm_subnet.appgw_subnet.name}-feip"
-  http_setting_name              = "${data.azurerm_subnet.appgw_subnet.name}-be-htst"
-  listener_name                  = "${data.azurerm_subnet.appgw_subnet.name}-httplstn"
-  request_routing_rule_name      = "${data.azurerm_subnet.appgw_subnet.name}-rqrt"
-  redirect_configuration_name    = "${data.azurerm_subnet.appgw_subnet.name}-rdrcfg"
+  backend_address_pool_name      = "${data.azurerm_subnet.appgw_subnet.virtual_network_name}-beap"
+  frontend_port_name             = "${data.azurerm_subnet.appgw_subnet.virtual_network_name}-feport"
+  frontend_ip_configuration_name = "${data.azurerm_subnet.appgw_subnet.virtual_network_name}-feip"
+  http_setting_name              = "${data.azurerm_subnet.appgw_subnet.virtual_network_name}-be-htst"
+  listener_name                  = "${data.azurerm_subnet.appgw_subnet.virtual_network_name}-httplstn"
+  request_routing_rule_name      = "${data.azurerm_subnet.appgw_subnet.virtual_network_name}-rqrt"
+  redirect_configuration_name    = "${data.azurerm_subnet.appgw_subnet.virtual_network_name}-rdrcfg"
 }
 
 resource "azurerm_public_ip" "appgw_pip" {
