@@ -79,7 +79,7 @@ module "tm" {
 }
 
 module "appserv" {
-    depends_on = [module.vnets]
+    depends_on = [module.db]
     source = "./modules/appserv"
     rg_name = module.resource_groups.rg-name
     location = var.location
@@ -92,11 +92,32 @@ module "appserv" {
 }
 
 module "db" {
-    depends_on = [module.vnets]
+    depends_on = [module.resource_groups]
     source = "./modules/db"
     rg_name = module.resource_groups.rg-name
     prefix = var.prefix
     location = var.location
+    #vnet_name_hub = "${var.vnet_name}0"
+
+}
+
+module "azdns" {
+    depends_on = [module.vnets]
+    source = "./modules/azdns"
+    rg_name = module.resource_groups.rg-name
+    prefix = var.prefix
+    location = var.location
+    #vnet_name_hub = "${var.vnet_name}0"
+
+}
+
+module "apim" {
+    depends_on = [module.vnets]
+    source = "./modules/apim"
+    rg_name = module.resource_groups.rg-name
+    prefix = var.prefix
+    location = var.location
+    publisher_email= var.publisher_email
     #vnet_name_hub = "${var.vnet_name}0"
 
 }

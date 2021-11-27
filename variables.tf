@@ -40,9 +40,7 @@ variable "tm_dns_name" {
   default= "app"
 }
 
-variable "prefix" {
-  default= "rrl"
-}
+
 
 variable "appserv" {
 default = "appserv"
@@ -50,5 +48,11 @@ default = "appserv"
 
 variable "appservplan" {
   default= "apppservplan"
+}
+variable "prefix" {
+  default= "rrl53"
+}
+variable "publisher_email" {
+    default="roberto.rodriguez@tokiota.com"
 }
 
