@@ -21,8 +21,7 @@ module "appserv" {
     appserv = var.appserv
     appservplan = var.appservplan
     prefix = var.prefix
-   # tm_dns_name = var.tm_dns_name
-    #vnet_name_hub = "${var.vnet_name}0"
+
 }
 
 
@@ -34,7 +33,7 @@ module "db" {
     rg_name = module.resource_groups.rg-name
     prefix = var.prefix
     location = var.location
-    #vnet_name_hub = "${var.vnet_name}0"
+
 }
 
 
@@ -62,27 +61,22 @@ module "vms" {
     depends_on = [module.vnets]
     source = "./modules/vms"
     rg_name = module.resource_groups.rg-name
-    #subnet_id = module.vnets.subnet-id[count.index]
-    #vnet_name = "${var.vnet_name}${count.index}"
     location = var.location
 }
 
-# ## 5. Application Gateway
-# module "appgw" {
-#     depends_on = [module.subnetshub]
-#     source = "./modules/appgw"
-#     rg_name = module.resource_groups.rg-name
-#     location = var.location
-#     #subnetappgw_id = module.subnetshub.subnetappgw-id
-#     appgw_pip_name = var.appgw_pip_name
-#     appgw_name = var.appgw_name
-#     appgw_subnet_name = var.appgw_subnet_name
-#     vnet_name_hub = var.vnet_name_hub
-#     prefix = var.prefix
-#     #vnet_name_hub = module.vnets.vnet-name
-#     #subnet_id = module.subnetshub.subnet-id
-# #    address_space = var.address_space[count.index]
-# }
+## 5. Application Gateway
+module "appgw" {
+    depends_on = [module.subnetshub]
+    source = "./modules/appgw"
+    rg_name = module.resource_groups.rg-name
+    location = var.location
+    appgw_pip_name = var.appgw_pip_name
+    appgw_name = var.appgw_name
+    appgw_subnet_name = var.appgw_subnet_name
+    vnet_name_hub = var.vnet_name_hub
+    prefix = var.prefix
+
+}
 
 # ##5. Peerings (conectividad enre redes)
 # module "peerings" {
