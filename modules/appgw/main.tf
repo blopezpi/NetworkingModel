@@ -16,10 +16,11 @@ locals {
 }
 
 resource "azurerm_public_ip" "appgw_pip" {
-  name                = "${var.prefix}-${var.appgw_name}-pip01" #tkt-appgw-pip01
+  name                = "${var.prefix}-${var.appgw_name}-pip01" 
   location            = var.location
   resource_group_name = var.rg_name
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
+  sku = "Standard"
 }
 
 resource "azurerm_application_gateway" "network" {
@@ -28,8 +29,8 @@ resource "azurerm_application_gateway" "network" {
   resource_group_name = var.rg_name
 
   sku {
-    name     = "Standard_Small"
-    tier     = "Standard"
+    name     = "WAF_v2"
+    tier     = "WAF_v2"
     capacity = 2
   }
 

@@ -12,7 +12,7 @@ module "resource_groups" {
   location = var.location
 }
 
-##2. Applicación (Appservice)
+#2. Applicación (Appservice)
 module "appserv" {
     depends_on = [module.resource_groups]
     source = "./modules/appserv"
@@ -64,7 +64,7 @@ module "vms" {
     location = var.location
 }
 
-## 5. Application Gateway
+# 5. Application Gateway
 module "appgw" {
     depends_on = [module.subnetshub]
     source = "./modules/appgw"
