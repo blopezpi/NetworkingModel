@@ -92,7 +92,7 @@ module "peerings" {
 
 ## 6. Azure Firewall (enrutamiento y proteccicón)
 module "azfirewall" {
-    depends_on = [module.vnets]
+    depends_on = [module.subnetshub]
     source = "./modules/fw"
     prefix = var.prefix
     rg_name = module.resource_groups.rg-name
@@ -106,7 +106,7 @@ module "azfirewall" {
 
 ## 8. Traffic Manager
 module "tm" {
-    depends_on = [module.vnets]
+    depends_on = [module.azfirewall]
     source = "./modules/tm"
     rg_name = module.resource_groups.rg-name
     tm_dns_name = var.tm_dns_name
@@ -117,7 +117,7 @@ module "tm" {
 
 ## 9 Azure DNS
 module "azdns" {
-    depends_on = [module.vnets]
+    depends_on = [module.tm]
     source = "./modules/azdns"
     rg_name = module.resource_groups.rg-name
     prefix = var.prefix
@@ -127,7 +127,7 @@ module "azdns" {
 }
 ## 10.API management
 module "apim" {
-    depends_on = [module.vnets]
+    depends_on = [module.azdns]
     source = "./modules/apim"
     rg_name = module.resource_groups.rg-name
     prefix = var.prefix
