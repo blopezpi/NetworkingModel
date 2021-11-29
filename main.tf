@@ -79,16 +79,16 @@ module "appgw" {
 }
 
 ##5. Peerings (conectividad enre redes)
-module "peerings" {
-    count = 2
-    depends_on = [module.vnets]
-    source = "./modules/peerings"
-    rg_name = module.resource_groups.rg-name
-    vnet_name_hub = "${var.vnet_name}0"
-    vnet_name_spoke = "${var.vnet_name}${count.index + 1}"
-    location = var.location
+# module "peerings" {
+#     count = 2
+#     depends_on = [module.vnets]
+#     source = "./modules/peerings"
+#     rg_name = module.resource_groups.rg-name
+#     vnet_name_hub = "${var.vnet_name}0"
+#     vnet_name_spoke = "${var.vnet_name}${count.index + 1}"
+#     location = var.location
 
-}
+# }
 
 ## 6. Azure Firewall (enrutamiento y proteccicón)
 module "azfirewall" {

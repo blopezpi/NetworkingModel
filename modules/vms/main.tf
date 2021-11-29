@@ -8,6 +8,24 @@ data "azurerm_subnet" "subnet1-vnet2" {
   virtual_network_name = "vnet2"
   resource_group_name = var.rg_name
 }
+data "azurerm_subnet" "subnet1-vnet0" {
+  name = "subnet1-vnet0"             
+  virtual_network_name = "vnet0"
+  resource_group_name = var.rg_name
+}
+
+resource "azurerm_network_interface" "nicvm0" {
+
+  name                = "nicvm0"
+  location            = var.location
+  resource_group_name = var.rg_name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = data.azurerm_subnet.subnet1-vnet0.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
 
 resource "azurerm_network_interface" "nicvm1" {
 
@@ -32,6 +50,31 @@ resource "azurerm_network_interface" "nicvm2" {
     name                          = "internal"
     subnet_id                     = data.azurerm_subnet.subnet1-vnet2.id
     private_ip_address_allocation = "Dynamic"
+  }
+}
+
+resource "azurerm_windows_virtual_machine" "vm0" {
+  depends_on = [azurerm_network_interface.nicvm0]
+  name                = "vm-vnet0"
+  location            = var.location
+  resource_group_name = var.rg_name
+  size                = "Standard_F2"
+  admin_username      = "adminuser"
+  admin_password      = "4-v3ry-53cr37-p455w0rd"
+  network_interface_ids = [
+    azurerm_network_interface.nicvm0.id,
+  ]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
   }
 }
 
