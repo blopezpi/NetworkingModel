@@ -50,7 +50,7 @@ variable "appservplan" {
   default= "apppservplan"
 }
 variable "prefix" {
-  default= "rrl053"
+  default= "rrl024"
 }
 variable "publisher_email" {
     default="roberto.rodriguez@tokiota.com"
