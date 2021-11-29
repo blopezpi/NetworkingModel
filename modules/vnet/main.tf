@@ -38,7 +38,6 @@ resource "azurerm_subnet_network_security_group_association" "nsgasoc" {
   name                  = "AzureBastionSubnet"
   resource_group_name   = var.rg_name
   virtual_network_name  = var.vnet_name
-  #address_prefixes      = var.address_space
   address_prefixes      =  [cidrsubnet("${azurerm_virtual_network.vnet.address_space[0]}",8,30)]
   }
 

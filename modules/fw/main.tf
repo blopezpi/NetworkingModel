@@ -1,7 +1,6 @@
 # Create the public ip for Azure Firewall
 resource "azurerm_public_ip" "azure_firewall_pip" {
-  name = "${var.prefix}-${var.fwpip_name}" #"tktproject-hub-fw-pip"
-  #name                = var.vnet_name
+  name = "${var.prefix}-${var.fwpip_name}"
   location            = var.location
   resource_group_name = var.rg_name
   allocation_method = "Static"
@@ -15,7 +14,6 @@ resource "azurerm_firewall" "azure_firewall" {
   resource_group_name= var.rg_name
   location            = var.location
   ip_configuration {
-   #name = "hg-${var.region}-core-azure-firewall-config"
     name = "hg-${var.location}-fw-config"
     subnet_id = var.subnetfw_id
     public_ip_address_id = azurerm_public_ip.azure_firewall_pip.id

@@ -23,10 +23,3 @@ resource "azurerm_app_service" "appserv" {
   app_settings = {
     "SOME_KEY" = "some-value"
   }
-
-#   connection_string {
-#     name  = "Database"
-#     type  = "SQLServer"
-#     value = "Server=some-server.mydomain.com;Integrated Security=SSPI"
-#   }
-}

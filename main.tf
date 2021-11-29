@@ -1,5 +1,5 @@
 provider "azurerm" {
-      #version = "~> 2.81.0"
+
       features {
       }
     }
@@ -87,7 +87,7 @@ module "peerings" {
     vnet_name_hub = "${var.vnet_name}0"
     vnet_name_spoke = "${var.vnet_name}${count.index + 1}"
     location = var.location
-#    address_space = var.address_space[count.index]
+
 }
 
 ## 6. Azure Firewall (enrutamiento y proteccicón)
@@ -100,8 +100,7 @@ module "azfirewall" {
     subnetfw_id = module.subnetshub.subnetfw-id
     fwpip_name = var.fwpip_name
     fw_name = var.fwpip_name
-    #subnet_id = module.subnetshub.subnet-id
-#    address_space = var.address_space[count.index]
+
 }
 
 ## 8. Traffic Manager
@@ -111,7 +110,7 @@ module "tm" {
     rg_name = module.resource_groups.rg-name
     tm_dns_name = var.tm_dns_name
     prefix = var.prefix
-    #vnet_name_hub = "${var.vnet_name}0"
+
 
 }
 
@@ -122,7 +121,7 @@ module "azdns" {
     rg_name = module.resource_groups.rg-name
     prefix = var.prefix
     location = var.location
-    #vnet_name_hub = "${var.vnet_name}0"
+
 
 }
 ## 10.API management
@@ -133,6 +132,6 @@ module "apim" {
     prefix = var.prefix
     location = var.location
     publisher_email= var.publisher_email
-    #vnet_name_hub = "${var.vnet_name}0"
+
 
 }
