@@ -23,14 +23,3 @@ data azurerm_virtual_network "vnethub" {
   #address_prefixes      = var.address_space
   address_prefixes      =  [cidrsubnet("${data.azurerm_virtual_network.vnethub.address_space[0]}",8,20)]
   }
-
-  resource "azurerm_subnet" "subnetbastion" {
-  depends_on = [
-    data.azurerm_virtual_network.vnethub
-  ]
-  name                  = "AzureBastionSubnet"
-  resource_group_name   = var.rg_name
-  virtual_network_name  = "vnet0"
-  #address_prefixes      = var.address_space
-  address_prefixes      =  [cidrsubnet("${data.azurerm_virtual_network.vnethub.address_space[0]}",8,30)]
-  }
