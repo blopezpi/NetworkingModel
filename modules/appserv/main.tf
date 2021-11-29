@@ -23,3 +23,4 @@ resource "azurerm_app_service" "appserv" {
   app_settings = {
     "SOME_KEY" = "some-value"
   }
+}
