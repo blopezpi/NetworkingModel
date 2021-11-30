@@ -13,6 +13,11 @@ data "azurerm_subnet" "subnet1-vnet0" {
   virtual_network_name = "vnet0"
   resource_group_name = var.rg_name
 }
+data "azurerm_subnet" "subnet2-vnet0" {
+  name = "subnet2-vnet0"             
+  virtual_network_name = "vnet0"
+  resource_group_name = var.rg_name
+}
 
 resource "azurerm_network_interface" "nicvm0" {
 
@@ -23,6 +28,19 @@ resource "azurerm_network_interface" "nicvm0" {
   ip_configuration {
     name                          = "internal"
     subnet_id                     = data.azurerm_subnet.subnet1-vnet0.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
+resource "azurerm_network_interface" "nicvm02" {
+
+  name                = "nicvm02"
+  location            = var.location
+  resource_group_name = var.rg_name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = data.azurerm_subnet.subnet2-vnet0.id
     private_ip_address_allocation = "Dynamic"
   }
 }
@@ -63,6 +81,31 @@ resource "azurerm_windows_virtual_machine" "vm0" {
   admin_password      = "4-v3ry-53cr37-p455w0rd"
   network_interface_ids = [
     azurerm_network_interface.nicvm0.id,
+  ]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
+  }
+}
+
+resource "azurerm_windows_virtual_machine" "vm02" {
+  depends_on = [azurerm_network_interface.nicvm02]
+  name                = "vm2-vnet0"
+  location            = var.location
+  resource_group_name = var.rg_name
+  size                = "Standard_F2"
+  admin_username      = "adminuser"
+  admin_password      = "4-v3ry-53cr37-p455w0rd"
+  network_interface_ids = [
+    azurerm_network_interface.nicvm02.id,
   ]
 
   os_disk {
